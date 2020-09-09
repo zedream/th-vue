@@ -10,7 +10,7 @@ export default [
       path: '/',
       meta: {
         title: '首页',
-        isAuth: false
+        isAuth: true
       },
       component: Index
     }]
