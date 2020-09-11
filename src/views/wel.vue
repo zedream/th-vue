@@ -1,22 +1,36 @@
 <template>
 <div class="home">
+  <div @click="dialog">dialog</div>
   <Upload></Upload>
 </div>
 </template>
 
 <script>
-import Upload from '@/components/upload.vue'
-//import Message from '@/document/message'
+import Upload from '@/components/upload'
+import Dialog from '@/document/dialog'
 
 export default {
   components: {
     Upload
   },
-  methods: {
-    // close(e) {
-    //   console.log('接收到子组件传递的内容：', e)
-    //   document.querySelector('body').removeChild(e)
-    // }
+  data() {
+    return {
+
+    }
   },
+  methods: {
+    dialog() {
+      Dialog({
+        title: '提示',
+        message: '大师分公司讲故事',
+        success: () => {
+          console.log('dialog confirm...')
+        },
+        cancel: () => {
+          console.log('dialog cancel...')
+        }
+      })
+    }
+  }
 }
 </script>

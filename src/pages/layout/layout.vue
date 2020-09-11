@@ -14,7 +14,7 @@
           <i @click="asideResize" class="iconfont icon-zhankai"></i>
           <el-dropdown @command="command">
             <div class="th_userinfo">
-              <div class="nickname" v-text="userInfo.nickname || 'not logged in'"></div>
+              <div class="nickname" v-text="userInfo.nickname || userInfo.username || 'not logged in'"></div>
               <img v-if="!userInfo.avatar" src="@/assets/default.png">
               <img v-else :src="userInfo.avatar">
             </div>
@@ -80,7 +80,6 @@ export default {
         setTimeout(() => {
           this.timer = false
           this.resizing = false
-          console.log(newVal)
         }, 300)
       }
     },
@@ -133,7 +132,7 @@ $bg: #5bb3e6;
 .th_layout_wrapping {
   width: 100vw;
   height: 100vh;
-  background: #fbfbfb;
+  background: #f7f7f7;
   overflow-y: auto;
 
   .th_layout {

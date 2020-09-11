@@ -17,14 +17,22 @@
 </template>
 
 <script>
-import Message from '@/document/message'
 import Alert from '@/document/alert'
+import Notification from '@/document/notification'
+import {
+  mapState
+} from 'vuex'
 export default {
   data() {
     return {
       username: '',
       password: ''
     }
+  },
+  computed: {
+    ...mapState({
+      userInfo: state => state.user.userInfo
+    })
   },
   methods: {
     login() {
@@ -40,14 +48,11 @@ export default {
           username: this.username,
           password: this.password
         })
-        .then((res) => {
-          console.log(res)
-          Message({
-            type: 'success',
-            message: '登录成功'
-          })
+        .then(() => {
           this.$router.push({
             path: '/'
+          }, () => {
+            this.notice()
           })
         })
         .catch(err => {
@@ -58,8 +63,16 @@ export default {
       this.$router.push({
         path: '/register'
       })
+    },
+    notice() {
+      let that = this
+      Notification({
+        title: '下午好',
+        message: `欢迎${that.userInfo.role} ${that.userInfo.nickname} 来到TH的demo系统`,
+        autoclose: true
+      })
     }
-  },
+  }
 }
 </script>
 

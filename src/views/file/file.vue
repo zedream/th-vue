@@ -1,8 +1,8 @@
 <template>
 <div class="container">
-  <el-table ref="multipleTable" :data="fileList" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChange">
+  <el-table ref="multipleTable" :data="dataList" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChange">
     <el-table-column type="selection" width="60" align="center"></el-table-column>
-    <el-table-column prop="name" label="文件名" align="center">
+    <el-table-column prop="name" label="小图" align="center">
       <template slot-scope="scope">
         <img class="thumbnail" :src="scope.row.url" :alt="scope.row.name">
       </template>
@@ -31,10 +31,11 @@
 </template>
 
 <script>
+import Message from '@/document/message'
 export default {
   data() {
     return {
-      fileList: [],
+      dataList: [],
       ids: [],
       page: {
         currentPage: 1,
@@ -44,7 +45,7 @@ export default {
     }
   },
   created() {
-    this.getFiles()
+    this.getData()
   },
   methods: {
     handleSelectionChange(val) { // 复选框
@@ -59,16 +60,26 @@ export default {
     },
     handleDelete(id) { // 删除
       console.log(id)
+      this.$store.dispatch('deleteFile', {
+        id
+      }).then((res) => {
+        this.getData()
+        Message({
+          type: 'success',
+          message: res.msg
+        })
+        console.log(res)
+      })
     },
     handleSizeChange(val) { // 分页
       this.page.pageSize = val
-      this.getFiles()
+      this.getData()
     },
     handleCurrentChange(val) {
       this.page.currentPage = val
-      this.getFiles()
+      this.getData()
     },
-    getFiles() { // 获取文件（图片）列表
+    getData() { // 获取文件（图片）列表
       this.$store.dispatch('getFiles', {
         currentPage: this.page.currentPage,
         pageSize: this.page.pageSize
@@ -77,7 +88,7 @@ export default {
         this.page.currentPage = res.data.currentPage
         this.page.pageSize = res.data.pageSize
         this.page.total = res.data.total
-        this.fileList = res.data.result
+        this.dataList = res.data.result
       })
     }
   }
@@ -89,6 +100,7 @@ export default {
   width: 100%;
   height: 100%;
   background: #FFFFFF;
+  overflow: auto;
 
   .thumbnail {
     width: 60px;
