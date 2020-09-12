@@ -94,6 +94,12 @@ export default {
       .catch(err => {
         console.log(err)
       })
+    this.$store.dispatch('getDict').then(() => {
+
+      })
+      .catch(err => {
+        console.log(err)
+      })
   },
   mounted() {
     window.onresize = () => {
@@ -197,6 +203,7 @@ $bg: #5bb3e6;
     }
 
     .right {
+      overflow-x: hidden;
       flex: 1;
       display: flex;
       flex-direction: column;

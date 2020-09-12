@@ -240,7 +240,7 @@ body {
   top: 50%;
   margin: 0 auto;
   transform: translateY(-100%);
-  width: 360px;
+  width: 370px;
   padding: 12px 24px;
   background: #FFFFFF;
   border-radius: 4px;
@@ -264,8 +264,18 @@ body {
 }
 .dialog_mid {
   padding: 16px 0;
+  display: flex;
+  align-items: center;
 }
-.mid_btm {
+.confirm_icon {
+  color: #e6a23c;
+  margin-right: 12px;
+}
+.dialog_message {
+  color: #606266;
+  font-size: 14px;
+}
+.dialog_btm {
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -358,6 +368,7 @@ body {
 
 .icon-confirm:before {
   content: "\e658";
+  font-size: 22px;
 }
 
 .icon-notice-info:before {

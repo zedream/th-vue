@@ -13,6 +13,11 @@
   color: #2c3e50;
 }
 
+.search_wrap {
+  display: flex;
+  padding: 12px 12px 0 12px;
+}
+
 ::-webkit-scrollbar {
   /*滚动条整体部分，其中的属性有width,height,background,border（就和一个块级元素一样）等。*/
   width: 6px;

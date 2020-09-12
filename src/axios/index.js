@@ -31,10 +31,17 @@ axios.interceptors.response.use(res => {
   }
   // 如果请求为非200否者默认统一处理
   if (status !== 200 && status !== 0) {
-		Message({
-      type: 'error',
-      message: message
-    })
+    if (status === 500) {
+      Message({
+        type: 'error',
+        message: '服务器错误，请联系管理员'
+      })
+    } else {
+      Message({
+        type: 'error',
+        message: message
+      })
+    }
     return Promise.reject(new Error(message))
   }
   return res

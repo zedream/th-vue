@@ -21,6 +21,7 @@ export default {
   methods: {
     dialog() {
       Dialog({
+        type: 'confirm',
         title: '提示',
         message: '大师分公司讲故事',
         success: () => {
