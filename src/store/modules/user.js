@@ -44,6 +44,18 @@ const user = {
           })
       })
     },
+    userDetail ({state}, data) {
+      console.log(state, data)
+      return new Promise((resolve, reject) => {
+        axios.post('/api/user/detail', data)
+          .then(res => {
+            resolve(res.data)
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
+    },
     logOut ({commit}) {
       return new Promise((resolve) => {
         commit('CLEARSTORAGE')

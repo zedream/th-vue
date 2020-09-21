@@ -119,24 +119,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container {
+.avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+}
+
+.page_wrapping {
+  display: flex;
+  align-items: center;
   width: 100%;
-  height: 100%;
-  background: #FFFFFF;
-  overflow: auto;
-
-  .avatar {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-  }
-
-  .page_wrapping {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    justify-content: flex-end;
-    margin-top: 12px;
-  }
+  justify-content: flex-end;
+  margin-top: 12px;
 }
 </style>

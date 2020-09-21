@@ -28,7 +28,7 @@ export default function() {
                         </div>
                         <div class="dialog_btm">
                           <div class="btn_box">
-                            <button class="th_cancel th_button th_btn_small">取消</button><button class="th_confirm th_button th_btn_primary th_btn_small">确定</button>
+                            <button type="button" class="th_cancel th_button th_btn_small">取消</button><button type="button" class="th_confirm th_button th_btn_primary th_btn_small">确定</button>
                           </div>
                         </div>
                       </div>
@@ -40,7 +40,7 @@ export default function() {
   let dialogWrapping = DOM.dialogDiv.children[0]
   let dialogBox = DOM.dialogDiv.children[0].children[0]
 
-  document.querySelector('.dialog_close, .th_cancel, .dialog_wrapping').addEventListener('click', (e) => {
+  document.querySelector('.th_cancel').addEventListener('click', (e) => {
     dialogBox.classList.remove('dialog_box_fade')
     dialogWrapping.classList.remove('dialog_fade')
     setTimeout(() => {
@@ -50,6 +50,33 @@ export default function() {
       delete DOM.dialogDiv
     }, 300)
     option.cancel()
+    e.stopPropagation()
+  }, false)
+  document.querySelector('.dialog_close').addEventListener('click', (e) => {
+    dialogBox.classList.remove('dialog_box_fade')
+    dialogWrapping.classList.remove('dialog_fade')
+    setTimeout(() => {
+      clearTimeout(timer)
+      timer = null
+      body.removeChild(DOM.dialogDiv)
+      delete DOM.dialogDiv
+    }, 300)
+    option.cancel()
+    e.stopPropagation()
+  }, false)
+  document.querySelector('.dialog_wrapping').addEventListener('click', (e) => {
+    dialogBox.classList.remove('dialog_box_fade')
+    dialogWrapping.classList.remove('dialog_fade')
+    setTimeout(() => {
+      clearTimeout(timer)
+      timer = null
+      body.removeChild(DOM.dialogDiv)
+      delete DOM.dialogDiv
+    }, 300)
+    option.cancel()
+    e.stopPropagation()
+  }, false)
+  document.querySelector('.dialog_box').addEventListener('click', (e) => {
     e.stopPropagation()
   }, false)
 

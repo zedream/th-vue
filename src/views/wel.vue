@@ -1,14 +1,14 @@
 <template>
-<div class="home">
-  <div @click="dialog">dialog</div>
+<div class="container">
   <Upload></Upload>
 </div>
 </template>
 
 <script>
 import Upload from '@/components/upload'
-import Dialog from '@/document/dialog'
-
+import {
+  mapState
+} from 'vuex'
 export default {
   components: {
     Upload
@@ -18,20 +18,15 @@ export default {
 
     }
   },
-  methods: {
-    dialog() {
-      Dialog({
-        type: 'confirm',
-        title: '提示',
-        message: '大师分公司讲故事',
-        success: () => {
-          console.log('dialog confirm...')
-        },
-        cancel: () => {
-          console.log('dialog cancel...')
-        }
-      })
-    }
+  computed: {
+    ...mapState({
+      userInfo: state => state.user.userInfo,
+      socket: state => state.socket.socket
+    })
   }
 }
 </script>
+
+<style lang="scss" scoped>
+
+</style>

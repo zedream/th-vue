@@ -22,6 +22,9 @@ import Notification from '@/document/notification'
 import {
   mapState
 } from 'vuex'
+import {
+  greet
+} from '@/utils/util'
 export default {
   data() {
     return {
@@ -67,8 +70,8 @@ export default {
     notice() {
       let that = this
       Notification({
-        title: '下午好',
-        message: `欢迎${that.userInfo.role} ${that.userInfo.nickname} 来到TH的demo系统`,
+        title: greet(new Date()),
+        message: `欢迎${that.userInfo.role} ${that.userInfo.nickname} 来到THao的demo系统`,
         autoclose: true
       })
     }
@@ -85,6 +88,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
 
   .login_container {
     position: relative;

@@ -4,6 +4,7 @@ import file from './modules/file'
 import user from './modules/user'
 import system from './modules/system'
 import dict from './modules/dict'
+import socket from './modules/socket'
 
 Vue.use(Vuex)
 
@@ -12,7 +13,8 @@ const store = new Vuex.Store({
     file,
     user,
     system,
-    dict
+    dict,
+    socket
   }
 })
 

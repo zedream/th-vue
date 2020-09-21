@@ -8,8 +8,11 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import VueAxios from 'vue-axios'
 import axios from './axios'
+import io from 'socket.io-client'
 
 Vue.config.productionTip = false
+
+Vue.prototype.$socketIO = io
 
 Vue.use(router)
 Vue.use(ElementUI)
@@ -19,5 +22,6 @@ new Vue({
   router,
   store,
   axios,
+  permission,
   render: h => h(App)
 }).$mount('#app')

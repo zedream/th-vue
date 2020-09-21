@@ -26,7 +26,7 @@
           </el-dropdown>
 
         </div>
-        <div class="th_nav"></div>
+        <tag class="th_nav"></tag>
       </div>
       <div class="th_container">
         <router-view />
@@ -41,9 +41,11 @@ import {
   mapState
 } from 'vuex'
 import thMenu from './menu'
+import tag from './tag'
 export default {
   components: {
-    thMenu
+    thMenu,
+    tag
   },
   data() {
     return {
@@ -63,7 +65,7 @@ export default {
     },
     ...mapState({
       userInfo: state => state.user.userInfo,
-      // routes: state => state.user.routes
+      socket: state => state.socket.socket
     })
   },
   watch: {
@@ -100,6 +102,23 @@ export default {
       .catch(err => {
         console.log(err)
       })
+    this.$store.dispatch('connect', {
+      io: this.$socketIO
+    }).then(res => {
+      res.on('connect', function () {
+        console.log('connect')
+      })
+      res.emit('getuserinfo', {
+        username: this.userInfo.username,
+        password: this.userInfo.password
+      })
+      res.on('loginsuccess', data => {
+        console.log('webSocket登录时间：', data)
+      })
+      res.on('disconnect', data => {
+        console.log('disconnect', data)
+      })
+    })
   },
   mounted() {
     window.onresize = () => {
@@ -122,10 +141,16 @@ export default {
     },
     command(e) {
       if (e === '0') {
+        this.socket.emit('logout', {
+          username: this.userInfo.username
+        })
         this.$store.dispatch('logOut').then(() => {
           this.$router.push('/login')
+          this.socket.close()
           console.log('log out...')
         })
+      } else if (e === '1') {
+        this.$router.push('/mine')
       }
     }
   },
@@ -209,7 +234,7 @@ $bg: #5bb3e6;
       flex-direction: column;
 
       .top {
-        height: 130px;
+        height: 120px;
 
         .th_header {
           background: white;
@@ -246,7 +271,7 @@ $bg: #5bb3e6;
 
         .th_nav {
           background: white;
-          height: 50px;
+          height: 40px;
           padding: 8px 12px;
           box-sizing: border-box;
         }

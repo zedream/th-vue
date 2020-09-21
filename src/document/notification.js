@@ -12,7 +12,7 @@ export default function() {
 
   let option = {}
   option = {
-    duration: 5000,
+    duration: 6600,
     ...arguments[0]
   }
 

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import pagesRouter from './pages'
+import viewsRouter from './views'
 import store from '@/store'
 //import Layout from '@/pages/layout/layout'
 import thRouter from './th-router'
@@ -30,6 +31,6 @@ let router = new Router({
 
 thRouter.install(Vue, router, store)
 router.$thRouter.createRoutes(store.state.user.routes)
-router.addRoutes([...pagesRouter])
+router.addRoutes([...viewsRouter, ...pagesRouter])
 
 export default router
