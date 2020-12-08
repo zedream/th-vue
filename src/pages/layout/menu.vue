@@ -8,7 +8,7 @@
       </span>
       <i class="el-icon-arrow-down"></i>
     </div>
-    <router-link class="menu_link_title" v-else :to="item.path">
+    <router-link class="menu_link_title" v-else :to="item.path" @click.native="addTag(item.path, item.meta.title)">
       <span>
         <i :class="`iconfont ${item.icon}`"></i>
         {{ item.meta.title }}
@@ -42,7 +42,9 @@ export default {
   },
   methods: {
     openMenu(length, path) {
+      console.log(path)
       this.refs.push(path)
+      console.log(this.currentPath, this.refs)
       this.refs = Array.from([...new Set(this.refs)])
       if (this.currentPath === path) {
         for (let i = 0; i < this.refs.length; i++) {
@@ -61,11 +63,17 @@ export default {
         this.$refs[path][0].style.cssText = `height: ${length * 40}px; overflow: hidden`
         this.currentPath = path
         setTimeout(() => {
-          this.$refs[path][0].style.cssText = `height: ${length * 40}px`
+          this.$refs[path][0].style.cssText = `height: auto`
         }, 300)
       }
+    },
+    addTag(path, title) {
+      this.$store.dispatch('addTag', {
+        path,
+        title
+      })
     }
-  },
+  }
 }
 </script>
 
